@@ -76,4 +76,43 @@ const collectionDeCartes = [
     )
 ];
 
-// Si tu fais un console.log(collectionDeCartes[0]), tu verras toutes les infos de Jean-Claude !
+// Fonction pour créer l'HTML d'une carte et l'afficher dans l'inventaire
+function afficherCarte(carteObject) {
+    // On cible la boîte vide dans notre index.html
+    const inventaire = document.getElementById('inventaire-cartes');
+
+    // On fabrique le bloc HTML avec les données de la carte
+    const htmlDeLaCarte = `
+        <div class="carte" id="${carteObject.id}">
+            <div class="carte-header">
+                <div class="carte-note">${carteObject.noteGlobale}</div>
+                <div class="carte-role-abrege">${carteObject.role.substring(0, 3)}</div>
+                <div class="carte-logo-parti">
+                    <img src="${carteObject.logoParti}" alt="Logo Parti">
+                </div>
+            </div>
+            
+            <div class="carte-photo">
+                <img src="${carteObject.image}" alt="Photo de ${carteObject.nom}">
+            </div>
+            
+            <div class="carte-infos">
+                <div class="carte-nom">${carteObject.prenom} <br> ${carteObject.nom}</div>
+                <div class="carte-stats-grid">
+                    <div class="stat-item"><span>CHA</span> <span class="stat-valeur">${carteObject.stats.CHA}</span></div>
+                    <div class="stat-item"><span>RIG</span> <span class="stat-valeur">${carteObject.stats.RIG}</span></div>
+                    <div class="stat-item"><span>ELO</span> <span class="stat-valeur">${carteObject.stats.ELO}</span></div>
+                    <div class="stat-item"><span>RES</span> <span class="stat-valeur">${carteObject.stats.RES}</span></div>
+                    <div class="stat-item"><span>STR</span> <span class="stat-valeur">${carteObject.stats.STR}</span></div>
+                    <div class="stat-item"><span>TER</span> <span class="stat-valeur">${carteObject.stats.TER}</span></div>
+                </div>
+            </div>
+        </div>
+    `;
+
+    // On injecte ce HTML dans la page
+    inventaire.innerHTML += htmlDeLaCarte;
+}
+
+// On lance l'affichage de notre carte de test !
+afficherCarte(maPremiereCarte);
