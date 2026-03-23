@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PolitiCards: Ultimate Campaign</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <header>
+        <div class="logo">🏛️ PolitiCards</div>
+        <nav>
+            <button onclick="changerEcran('ecran-menu')" class="nav-btn active">Accueil</button>
+            <button onclick="changerEcran('ecran-campagne')" class="nav-btn">Campagne</button>
+            <button onclick="changerEcran('ecran-collection')" class="nav-btn">Collection</button>
+            <button onclick="changerEcran('ecran-boutique')" class="nav-btn">Boutique</button>
+        </nav>
+        <div class="ressources">
+            💰 <span id="argent-joueur">1500</span>
+        </div>
+    </header>
+
+    <main>
+        <section id="ecran-menu" class="ecran actif">
+            <h1>Bienvenue, Directeur de Campagne</h1>
+            <p>Préparez votre équipe, gérez votre budget et remportez la mairie.</p>
+            <button class="btn-action" onclick="changerEcran('ecran-campagne')">Lancer une campagne</button>
+        </section>
+
+        <section id="ecran-campagne" class="ecran">
+            <h2>Votre Équipe de Campagne</h2>
+            <div id="squad-builder" class="grid-container">
+                <p>Le plateau de jeu sera ici.</p>
+            </div>
+        </section>
+
+        <section id="ecran-collection" class="ecran">
+            <h2>Votre Collection</h2>
+            <div id="inventaire-cartes" class="grid-container">
+                <p>Vos cartes s'afficheront ici.</p>
+            </div>
+        </section>
+
+        <section id="ecran-boutique" class="ecran">
+            <h2>La Boutique</h2>
+            <div class="pack-container">
+                <div class="pack">
+                    <h3>Pack Standard</h3>
+                    <p>Contient 3 cartes (Max: Rare)</p>
+                    <button class="btn-action">Ouvrir (500 💰)</button>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <script src="script.js"></script>
+</body>
+</html>
