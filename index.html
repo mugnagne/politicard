@@ -59,10 +59,15 @@
         </div>
     </div>
 
-    <div class="team-stats">
-        <h3>Score Global de l'Équipe : <span id="score-equipe">0</span></h3>
-        <button class="btn-action" id="btn-lancer-campagne" style="display:none;">Lancer la Campagne Municipale</button>
+<div class="team-stats">
+    <h3>Score Global : <span id="score-equipe">0</span> | Soutien : <span id="sondage-score">50</span>%</h3>
+    
+    <div id="journal-campagne" style="background: #000; color: #2ecc71; padding: 15px; border-radius: 5px; margin: 20px auto; max-width: 600px; height: 200px; overflow-y: auto; text-align: left; font-family: monospace; display: none;">
+        <p>> Initialisation de la campagne...</p>
     </div>
+
+    <button class="btn-action" id="btn-lancer-campagne" style="display:none;" onclick="demarrerSimulation()">Lancer la Campagne Municipale</button>
+</div>
 </section>
 
         <section id="ecran-collection" class="ecran">
