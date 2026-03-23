@@ -1,0 +1,105 @@
+/* Reset de base pour un affichage propre */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+body {
+    background-color: #1a1a2e; /* Bleu nuit très sombre */
+    color: #eaeaea;
+}
+
+/* --- EN-TÊTE ET NAVIGATION --- */
+header {
+    background-color: #16213e;
+    padding: 15px 30px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 2px solid #e94560; /* Ligne rouge politique */
+}
+
+.logo {
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: #fff;
+}
+
+nav .nav-btn {
+    background: none;
+    border: none;
+    color: #a0a0a0;
+    font-size: 1.1rem;
+    margin: 0 10px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+nav .nav-btn:hover, nav .nav-btn.active {
+    color: #ffd700; /* Or / Doré */
+    text-decoration: underline;
+    text-underline-offset: 5px;
+}
+
+.ressources {
+    font-weight: bold;
+    font-size: 1.2rem;
+    color: #ffd700;
+}
+
+/* --- STRUCTURE DES ÉCRANS --- */
+main {
+    padding: 40px;
+    text-align: center;
+}
+
+/* Par défaut, on cache tous les écrans */
+.ecran {
+    display: none; 
+}
+
+/* Seul l'écran avec la classe 'actif' est visible */
+.ecran.actif {
+    display: block; 
+    animation: fadeIn 0.4s ease-in-out;
+}
+
+h1, h2 {
+    margin-bottom: 20px;
+    color: #fff;
+}
+
+/* --- BOUTONS ET CONTENEURS --- */
+.btn-action {
+    background-color: #e94560;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    font-size: 1.2rem;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: 0.3s;
+    margin-top: 20px;
+}
+
+.btn-action:hover {
+    background-color: #ff5c77;
+    transform: scale(1.05);
+}
+
+.pack {
+    background-color: #0f3460;
+    padding: 30px;
+    border: 2px solid #ffd700;
+    border-radius: 10px;
+    display: inline-block;
+    margin-top: 20px;
+}
+
+/* Animation douce pour l'apparition des écrans */
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
