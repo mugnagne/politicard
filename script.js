@@ -16,39 +16,49 @@ function changerEcran(idEcranCible) {
 
 // Définition du "moule" pour toutes nos cartes politiques
 class CartePolitique {
-    constructor(id, prenom, nom, role, rarete, stats, imagePath) {
-        this.id = id; // Un identifiant unique (ex: "carte_001")
+    constructor(id, prenom, nom, role, parti, logoParti, rarete, stats, imagePath) {
+        this.id = id;
         this.prenom = prenom;
         this.nom = nom;
-        this.role = role; // Ex: "Trésorier", "Candidat"...
-        this.rarete = rarete; // Ex: "Commun", "Rare", "Légendaire"
-        this.image = imagePath; // Le lien vers la photo du politicien
-        
-        // Les 6 statistiques (un objet contenant les notes de 1 à 99)
-        this.stats = {
-            CHA: stats.CHA, // Charisme
-            ELO: stats.ELO, // Éloquence
-            STR: stats.STR, // Stratégie
-            RIG: stats.RIG, // Rigueur
-            RES: stats.RES, // Réseau
-            TER: stats.TER  // Terrain
-        };
-
-        // On calcule automatiquement la note globale (Général/OVR) à la création de la carte
+        this.role = role;
+        this.parti = parti; 
+        this.logoParti = logoParti; // URL de l'image du logo
+        this.rarete = rarete;
+        this.image = imagePath;
+        this.stats = stats;
         this.noteGlobale = this.calculerNoteGlobale();
     }
 
-    // Méthode (fonction interne) pour calculer la moyenne des stats
     calculerNoteGlobale() {
         let total = this.stats.CHA + this.stats.ELO + this.stats.STR + 
                     this.stats.RIG + this.stats.RES + this.stats.TER;
-        // On divise par 6 et on arrondit à l'entier le plus proche
         return Math.round(total / 6); 
     }
 }
 
 // --- EXEMPLE DE CRÉATION DE CARTES ---
+const prenoms = ["Jean-Marc", "Patrick", "Ségolène", "Valérie", "Xavier", "Arnaud", "Nathalie", "Édouard"];
+const noms = ["Balkany", "De La Villardière", "Levallois", "Montbourg", "Pécresse", "Sarkoz", "Dufour", "Bouchard"];
 
+function genererNomAleatoire() {
+    const prenom = prenoms[Math.floor(Math.random() * prenoms.length)];
+    const nom = noms[Math.floor(Math.random() * noms.length)];
+    return { prenom, nom };
+}
+
+// 3. CRÉATION D'UNE CARTE DE TEST
+const nomAleatoire = genererNomAleatoire();
+const maPremiereCarte = new CartePolitique(
+    "c_test_1", 
+    nomAleatoire.prenom, 
+    nomAleatoire.nom, 
+    "Candidat", 
+    "Parti Socialiste", 
+    "https://upload.wikimedia.org/wikipedia/commons/2/26/Logo_Parti_Socialiste.svg", // Logo PS
+    "Légendaire", 
+    { CHA: 88, ELO: 85, STR: 70, RIG: 40, RES: 92, TER: 65 },
+    "https://randomuser.me/api/portraits/men/32.jpg" // Visage aléatoire
+);
 // On crée une base de données de cartes (un tableau JavaScript)
 const collectionDeCartes = [
     // Création d'un Trésorier Légendaire
