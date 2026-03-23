@@ -132,7 +132,74 @@ function mettreAJourCollection() {
         zoneCollection.innerHTML += genererHTMLCarte(carte);
     });
 }
+// --- 9. GESTION DE L'ÉQUIPE (SQUAD) ---
+let equipeActuelle = {
+    "Candidat": null,
+    "Directeur Campagne": null,
+    "Trésorier": null,
+    "Responsable Communication": null,
+    "Responsable Terrain": null,
+    "Porte-parole": null
+};
 
+// Fonction pour choisir une carte
+function ouvrirSelecteur(roleCible) {
+    // On filtre l'inventaire pour ne montrer que les cartes ayant le bon rôle
+    const cartesCompatibles = inventaireJoueur.filter(c => c.role === roleCible);
+    
+    if (cartesCompatibles.length === 0) {
+        alert("Vous n'avez aucune carte de type : " + roleCible + ". Allez à la boutique !");
+        return;
+    }
+
+    // Pour simplifier ce MVP, on va juste prendre la première carte compatible trouvée
+    // (Dans une version finale, on ouvrirait une fenêtre de choix)
+    const carteChoisie = cartesCompatibles[0];
+    assignerCarteAEquipe(roleCible, carteChoisie);
+}
+
+function assignerCarteAEquipe(role, carte) {
+    equipeActuelle[role] = carte;
+    
+    // Mise à jour visuelle du slot
+    // On trouve l'ID du slot HTML (attention aux correspondances d'ID)
+    let idSlot = "";
+    if(role === "Candidat") idSlot = "slot-Candidat";
+    if(role === "Directeur Campagne") idSlot = "slot-Directeur";
+    if(role === "Trésorier") idSlot = "slot-Tresorier";
+    if(role === "Responsable Communication") idSlot = "slot-Com";
+    if(role === "Responsable Terrain") idSlot = "slot-Terrain";
+    if(role === "Porte-parole") idSlot = "slot-Porteparole";
+
+    const slotDiv = document.getElementById(idSlot);
+    if (slotDiv) {
+        slotDiv.querySelector('.slot-content').innerHTML = genererHTMLCarte(carte);
+        slotDiv.style.borderStyle = "solid";
+        slotDiv.style.borderColor = "#ffd700";
+    }
+
+    calculerForceEquipe();
+}
+
+function calculerForceEquipe() {
+    let totalStats = 0;
+    let nbMembres = 0;
+
+    for (let role in equipeActuelle) {
+        if (equipeActuelle[role]) {
+            totalStats += equipeActuelle[role].noteGlobale;
+            nbMembres++;
+        }
+    }
+
+    const scoreTotal = nbMembres > 0 ? Math.round(totalStats / nbMembres) : 0;
+    document.getElementById('score-equipe').innerText = scoreTotal;
+
+    // Si l'équipe est complète (6 membres), on affiche le bouton pour lancer la campagne
+    if (nbMembres === 6) {
+        document.getElementById('btn-lancer-campagne').style.display = "inline-block";
+    }
+}
 // On initialise la collection au lancement (elle sera vide au début)
 mettreAJourCollection();
 
