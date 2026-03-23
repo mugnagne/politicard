@@ -28,12 +28,42 @@
             <button class="btn-action" onclick="changerEcran('ecran-campagne')">Lancer une campagne</button>
         </section>
 
-        <section id="ecran-campagne" class="ecran">
-            <h2>Votre Équipe de Campagne</h2>
-            <div id="squad-builder" class="grid-container">
-                <p>Le plateau de jeu sera ici.</p>
-            </div>
-        </section>
+       <section id="ecran-campagne" class="ecran">
+    <h2>Constituez votre État-Major</h2>
+    <p>Cliquez sur un poste pour assigner un membre de votre collection.</p>
+    
+    <div id="squad-builder" class="squad-grid">
+        <div class="slot" onclick="ouvrirSelecteur('Candidat')" id="slot-Candidat">
+            <span class="role-label">Candidat</span>
+            <div class="slot-content">Videt (Cliquez)</div>
+        </div>
+        <div class="slot" onclick="ouvrirSelecteur('Directeur Campagne')" id="slot-Directeur">
+            <span class="role-label">Directeur</span>
+            <div class="slot-content">Vide</div>
+        </div>
+        <div class="slot" onclick="ouvrirSelecteur('Trésorier')" id="slot-Tresorier">
+            <span class="role-label">Trésorier</span>
+            <div class="slot-content">Vide</div>
+        </div>
+        <div class="slot" onclick="ouvrirSelecteur('Responsable Communication')" id="slot-Com">
+            <span class="role-label">Communication</span>
+            <div class="slot-content">Vide</div>
+        </div>
+        <div class="slot" onclick="ouvrirSelecteur('Responsable Terrain')" id="slot-Terrain">
+            <span class="role-label">Terrain</span>
+            <div class="slot-content">Vide</div>
+        </div>
+        <div class="slot" onclick="ouvrirSelecteur('Porte-parole')" id="slot-Porteparole">
+            <span class="role-label">Porte-parole</span>
+            <div class="slot-content">Vide</div>
+        </div>
+    </div>
+
+    <div class="team-stats">
+        <h3>Score Global de l'Équipe : <span id="score-equipe">0</span></h3>
+        <button class="btn-action" id="btn-lancer-campagne" style="display:none;">Lancer la Campagne Municipale</button>
+    </div>
+</section>
 
         <section id="ecran-collection" class="ecran">
             <h2>Votre Collection</h2>
