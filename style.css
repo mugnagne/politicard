@@ -191,6 +191,57 @@ h1, h2 {
 .stat-valeur {
     font-weight: bold;
 }
+/* --- SQUAD BUILDER --- */
+.squad-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr); /* 3 colonnes */
+    gap: 20px;
+    max-width: 800px;
+    margin: 20px auto;
+}
+
+.slot {
+    background-color: rgba(255, 255, 255, 0.05);
+    border: 2px dashed #555;
+    border-radius: 10px;
+    height: 180px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.slot:hover {
+    background-color: rgba(255, 215, 0, 0.1);
+    border-color: #ffd700;
+}
+
+.role-label {
+    font-size: 0.8rem;
+    color: #ffd700;
+    text-transform: uppercase;
+    margin-bottom: 10px;
+}
+
+.slot-content {
+    font-size: 0.9rem;
+    color: #888;
+}
+
+/* Quand une carte est insérée dans un slot */
+.slot .carte {
+    transform: scale(0.6); /* On réduit la carte pour qu'elle tienne dans le slot */
+    margin: -60px 0; /* On compense l'espace vide dû au scale */
+}
+
+.team-stats {
+    margin-top: 30px;
+    padding: 20px;
+    background: #16213e;
+    border-radius: 10px;
+}
 /* Animation douce pour l'apparition des écrans */
 @keyframes fadeIn {
     from { opacity: 0; transform: translateY(10px); }
