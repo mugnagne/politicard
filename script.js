@@ -47,7 +47,13 @@ const catalogueCartes = [
     new CartePolitique("c_002", "Martine", "Boulard", "Candidat", "Parti Socialiste", "https://upload.wikimedia.org/wikipedia/commons/2/26/Logo_Parti_Socialiste.svg", "Légendaire", { CHA: 85, ELO: 80, STR: 65, RIG: 50, RES: 75, TER: 60 }, "https://randomuser.me/api/portraits/women/68.jpg"),
     new CartePolitique("c_003", "Yannick", "Arbre", "Responsable Terrain", "Les Écologistes", "https://upload.wikimedia.org/wikipedia/fr/thumb/b/b5/Logo_Europe_Écologie_Les_Verts.svg/120px-Logo_Europe_Écologie_Les_Verts.svg.png", "Commun", { CHA: 40, ELO: 50, STR: 30, RIG: 60, RES: 40, TER: 85 }, "https://randomuser.me/api/portraits/men/22.jpg"),
     new CartePolitique("c_004", "Sophie", "Réseau", "Directeur Campagne", "Mouvement Centre", "https://upload.wikimedia.org/wikipedia/commons/thumb/2/2b/Logo_Renaissance_%28parti_politique%29.svg/120px-Logo_Renaissance_%28parti_politique%29.svg.png", "Épique", { CHA: 60, ELO: 70, STR: 88, RIG: 75, RES: 85, TER: 40 }, "https://randomuser.me/api/portraits/women/42.jpg"),
-    new CartePolitique("c_005", "Luc", "Micro", "Porte-parole", "Parti Socialiste", "https://upload.wikimedia.org/wikipedia/commons/2/26/Logo_Parti_Socialiste.svg", "Rare", { CHA: 75, ELO: 85, STR: 50, RIG: 30, RES: 65, TER: 30 }, "https://randomuser.me/api/portraits/men/31.jpg")
+    new CartePolitique("c_005", "Luc", "Micro", "Porte-parole", "Parti Socialiste", "https://upload.wikimedia.org/wikipedia/commons/2/26/Logo_Parti_Socialiste.svg", "Rare", { CHA: 75, ELO: 85, STR: 50, RIG: 30, RES: 65, TER: 30 }, "https://randomuser.me/api/portraits/men/31.jpg"),
+    
+    // LA NOUVELLE CARTE COMMUNICATION :
+    new CartePolitique("c_006", "Clémence", "Insta", "Responsable Communication", "Mouvement Centre", "https://upload.wikimedia.org/wikipedia/commons/thumb/2/2b/Logo_Renaissance_%28parti_politique%29.svg/120px-Logo_Renaissance_%28parti_politique%29.svg.png", "Rare", { CHA: 70, ELO: 60, STR: 50, RIG: 40, RES: 90, TER: 50 }, "https://randomuser.me/api/portraits/women/12.jpg"),
+    
+    // UN DEUXIÈME CANDIDAT POUR PLUS DE VARIÉTÉ :
+    new CartePolitique("c_007", "Gérard", "Terroir", "Candidat", "Indépendant", "https://upload.wikimedia.org/wikipedia/commons/thumb/b/b7/Logo_Chasse_pêche_nature_et_traditions.svg/120px-Logo_Chasse_pêche_nature_et_traditions.svg.png", "Commun", { CHA: 65, ELO: 55, STR: 40, RIG: 70, RES: 50, TER: 80 }, "https://randomuser.me/api/portraits/men/54.jpg")
 ];
 
 // --- 5. LES DONNÉES DU JOUEUR ---
