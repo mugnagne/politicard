@@ -1,20 +1,14 @@
-// Fonction pour gérer la navigation entre les onglets
+// --- 1. NAVIGATION ENTRE LES ÉCRANS ---
 function changerEcran(idEcranCible) {
-    // 1. On cache tous les écrans en leur retirant la classe "actif"
     const ecrans = document.querySelectorAll('.ecran');
     ecrans.forEach(ecran => {
         ecran.classList.remove('actif');
     });
-
-    // 2. On affiche l'écran demandé
     const ecranCible = document.getElementById(idEcranCible);
     ecranCible.classList.add('actif');
-
-    // 3. Optionnel : On met à jour l'état visuel des boutons du menu
-    // (Tu peux ajouter cette logique plus tard pour peaufiner l'UI)
 }
 
-// Définition du "moule" pour toutes nos cartes politiques
+// --- 2. LE MOULE DE LA CARTE (Version avec Parti Politique) ---
 class CartePolitique {
     constructor(id, prenom, nom, role, parti, logoParti, rarete, stats, imagePath) {
         this.id = id;
@@ -22,7 +16,7 @@ class CartePolitique {
         this.nom = nom;
         this.role = role;
         this.parti = parti; 
-        this.logoParti = logoParti; // URL de l'image du logo
+        this.logoParti = logoParti; 
         this.rarete = rarete;
         this.image = imagePath;
         this.stats = stats;
@@ -36,7 +30,7 @@ class CartePolitique {
     }
 }
 
-// --- EXEMPLE DE CRÉATION DE CARTES ---
+// --- 3. GÉNÉRATEUR DE NOMS ---
 const prenoms = ["Jean-Marc", "Patrick", "Ségolène", "Valérie", "Xavier", "Arnaud", "Nathalie", "Édouard"];
 const noms = ["Balkany", "De La Villardière", "Levallois", "Montbourg", "Pécresse", "Sarkoz", "Dufour", "Bouchard"];
 
@@ -46,7 +40,7 @@ function genererNomAleatoire() {
     return { prenom, nom };
 }
 
-// 3. CRÉATION D'UNE CARTE DE TEST
+// --- 4. CRÉATION D'UNE CARTE DE TEST ---
 const nomAleatoire = genererNomAleatoire();
 const maPremiereCarte = new CartePolitique(
     "c_test_1", 
@@ -54,34 +48,15 @@ const maPremiereCarte = new CartePolitique(
     nomAleatoire.nom, 
     "Candidat", 
     "Parti Socialiste", 
-    "https://upload.wikimedia.org/wikipedia/commons/2/26/Logo_Parti_Socialiste.svg", // Logo PS
+    "https://upload.wikimedia.org/wikipedia/commons/2/26/Logo_Parti_Socialiste.svg",
     "Légendaire", 
     { CHA: 88, ELO: 85, STR: 70, RIG: 40, RES: 92, TER: 65 },
-    "https://randomuser.me/api/portraits/men/32.jpg" // Visage aléatoire
+    "https://randomuser.me/api/portraits/men/32.jpg"
 );
-// On crée une base de données de cartes (un tableau JavaScript)
-const collectionDeCartes = [
-    // Création d'un Trésorier Légendaire
-    new CartePolitique(
-        "c_001", "Jean-Claude", "Dufinance", "Trésorier", "Légendaire", 
-        { CHA: 25, ELO: 40, STR: 80, RIG: 95, RES: 70, TER: 30 },
-        "images/jean_claude.jpg"
-    ),
-    
-    // Création d'une Responsable Terrain Commune
-    new CartePolitique(
-        "c_002", "Martine", "Pavé", "Responsable Terrain", "Commun", 
-        { CHA: 50, ELO: 45, STR: 30, RIG: 60, RES: 40, TER: 85 },
-        "images/martine.jpg"
-    )
-];
 
-// Fonction pour créer l'HTML d'une carte et l'afficher dans l'inventaire
+// --- 5. INJECTION HTML (L'affichage visuel) ---
 function afficherCarte(carteObject) {
-    // On cible la boîte vide dans notre index.html
     const inventaire = document.getElementById('inventaire-cartes');
-
-    // On fabrique le bloc HTML avec les données de la carte
     const htmlDeLaCarte = `
         <div class="carte" id="${carteObject.id}">
             <div class="carte-header">
@@ -109,10 +84,8 @@ function afficherCarte(carteObject) {
             </div>
         </div>
     `;
-
-    // On injecte ce HTML dans la page
     inventaire.innerHTML += htmlDeLaCarte;
 }
 
-// On lance l'affichage de notre carte de test !
+// On lance l'affichage au chargement
 afficherCarte(maPremiereCarte);
