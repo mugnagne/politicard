@@ -82,7 +82,7 @@ function genererHTMLCarte(carteObject) {
 
 // --- 7. LA BOUTIQUE (Système de Gacha/Packs) ---
 function ouvrirPack() {
-    const prixPack = 500;
+    const prixPack = 50;
     
     // On vérifie si le joueur a assez d'argent
     if (argentJoueur >= prixPack) {
@@ -199,6 +199,91 @@ function calculerForceEquipe() {
     if (nbMembres === 6) {
         document.getElementById('btn-lancer-campagne').style.display = "inline-block";
     }
+}
+// --- 10. BASE DE DONNÉES DES ÉVÉNEMENTS (MUNICIPALES) ---
+const evenementsMunicipaux = [
+    { texte: "Débat sur la radio locale contre l'opposition.", stat: "ELO", diff: 60, success: "Vous avez brillé ! +10% de soutien.", fail: "Bafouillages en direct... -10% de soutien." },
+    { texte: "Le trésorier doit justifier un don anonyme suspect.", stat: "RIG", diff: 70, success: "Transparence totale, les électeurs sont rassurés. +5% de soutien.", fail: "Soupçons de corruption... -15% de soutien." },
+    { texte: "Grande opération de tractage sur le marché central.", stat: "TER", diff: 50, success: "Le terrain est conquis ! +8% de soutien.", fail: "Vos militants étaient trop peu nombreux. -5% de soutien." },
+    { texte: "Fuite d'un dossier compromettant dans la presse.", stat: "STR", diff: 75, success: "Contre-attaque magistrale de votre équipe. +10% de soutien.", fail: "Le scandale s'installe. -20% de soutien." },
+    { texte: "Meeting de fin de campagne au gymnase municipal.", stat: "CHA", diff: 65, success: "Salle comble, l'ambiance est électrique ! +12% de soutien.", fail: "Le gymnase sonne creux... -8% de soutien." }
+];
+
+let scoreSondage = 50;
+
+function demarrerSimulation() {
+    const journal = document.getElementById('journal-campagne');
+    const btn = document.getElementById('btn-lancer-campagne');
+    journal.style.display = "block";
+    journal.innerHTML = "<p>> Début de la campagne municipale...</p>";
+    btn.disabled = true; // Empêcher de cliquer deux fois
+
+    let tour = 0;
+    
+    // On lance un événement toutes les 2 secondes
+    const intervalle = setInterval(() => {
+        if (tour < evenementsMunicipaux.length) {
+            jouerTour(evenementsMunicipaux[tour]);
+            tour++;
+        } else {
+            clearInterval(intervalle);
+            cloturerCampagne();
+            btn.disabled = false;
+        }
+    }, 2000);
+}
+
+function jouerTour(evenement) {
+    const journal = document.getElementById('journal-campagne');
+    
+    // 1. On récupère la stat moyenne de l'équipe pour cette compétence
+    let sommeStat = 0;
+    let nb = 0;
+    for (let r in equipeActuelle) {
+        if (equipeActuelle[r]) {
+            sommeStat += equipeActuelle[r].stats[evenement.stat];
+            nb++;
+        }
+    }
+    let moyenneEquipe = sommeStat / nb;
+
+    // 2. Calcul de réussite (Moyenne + petit facteur chance vs Difficulté)
+    let jetDeDes = Math.floor(Math.random() * 20); // Facteur chance
+    let reussite = (moyenneEquipe + jetDeDes) >= evenement.diff;
+
+    // 3. Application des résultats
+    let message = "";
+    if (reussite) {
+        scoreSondage += 10;
+        message = `<p style="color: #2ecc71;">[SUCCÈS] ${evenement.texte} <br> ${evenement.success}</p>`;
+    } else {
+        scoreSondage -= 10;
+        message = `<p style="color: #e94560;">[ÉCHEC] ${evenement.texte} <br> ${evenement.fail}</p>`;
+    }
+
+    journal.innerHTML += message;
+    journal.scrollTop = journal.scrollHeight; // Scroll automatique
+    document.getElementById('sondage-score').innerText = scoreSondage;
+}
+
+function cloturerCampagne() {
+    const journal = document.getElementById('journal-campagne');
+    let prime = 0;
+
+    if (scoreSondage >= 51) {
+        prime = 1000;
+        journal.innerHTML += `<p style="color: gold;">🎉 VICTOIRE ! Vous êtes élu maire. Bonus : +${prime} 💰</p>`;
+    } else {
+        prime = 200;
+        journal.innerHTML += `<p style="color: #888;">❌ DÉFAITE... Vous restez dans l'opposition. Consolation : +${prime} 💰</p>`;
+    }
+
+    // Créditer l'argent
+    argentJoueur += prime;
+    document.getElementById('argent-joueur').innerText = argentJoueur;
+    
+    // Reset pour la prochaine fois
+    scoreSondage = 50;
 }
 // On initialise la collection au lancement (elle sera vide au début)
 mettreAJourCollection();
